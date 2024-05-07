@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package mods.tesseract.renaissance;
 
 import java.io.File;
 
@@ -6,12 +6,12 @@ import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 
-    public static String greeting = "Hello World";
+    public static boolean disableWoodPunch = false;
 
     public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
 
-        greeting = configuration.getString("greeting", Configuration.CATEGORY_GENERAL, greeting, "How shall I greet?");
+        disableWoodPunch = configuration.getBoolean("disableWoodPunch", Configuration.CATEGORY_GENERAL, disableWoodPunch, "You cannot punch wood without tool.");
 
         if (configuration.hasChanged()) {
             configuration.save();

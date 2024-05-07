@@ -35,4 +35,14 @@
  */
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
+    implementation("curse.maven:mysteriumlib-645051:3963820")
+    accessTransformersFile = file("src/main/resources/META-INF/renaissance_at.cfg")
+}
+
+
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'mods.tesseract.renaissance.fix.FixLoader'
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
 }
