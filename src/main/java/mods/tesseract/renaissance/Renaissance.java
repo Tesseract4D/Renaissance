@@ -11,10 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.client.GuiIngameForge;
@@ -23,6 +20,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
+import net.minecraftforge.event.world.BlockEvent;
+
+import static java.lang.Float.NaN;
 
 @Mod(modid = Renaissance.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
 public class Renaissance {
@@ -102,6 +102,22 @@ public class Renaissance {
                 e.entityPlayer.heal(2);
             else
                 e.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlace(BlockEvent.PlaceEvent e) {
+        if (e.itemInHand.getItem() instanceof ItemHoe) {
+            e.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void onHarvestDrops(BlockEvent.BreakEvent e) {
+        EntityPlayer p=e.getPlayer();
+        ItemStack k = p.getCurrentEquippedItem();
+        if (p.isSneaking() && k.getItem() instanceof ItemHoe i) {
+            e.setCanceled(i.onItemUse(k, e.getPlayer(), e.world, e.x, e.y, e.z, 1, 0, 0, 0));
         }
     }
 

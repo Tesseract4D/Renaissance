@@ -10,5 +10,8 @@ public class FixLoader extends CustomLoadingPlugin {
 
     public void registerFixes() {
         registerClassWithFixes("mods.tesseract.renaissance.fix.FixesCommon");
+        registerClassWithFixes("mods.tesseract.renaissance.fix.FixesItemHoe");
+        registerClassWithFixes("mods.tesseract.renaissance.fix.FixesEntityPlayer");
+        registerClassWithFixes("mods.tesseract.renaissance.fix.FixesRepair");
     }
 }
